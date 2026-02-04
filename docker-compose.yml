@@ -1,6 +1,6 @@
 services:
   backend-1:
-    image: faisalrasheedpro/loadbalancer:latest
+    image: faisalrasheedpro/loadbalancer:${{ IMAGE_TAG }}
     container_name: backend-1
     environment: 
       - CONTAINER=backend-1
@@ -16,7 +16,7 @@ services:
       retries: 3
       start_period: 5s
   backend-2:
-    image: faisalrasheedpro/loadbalancer:latest
+    image: faisalrasheedpro/loadbalancer:${{ IMAGE_TAG }}
     container_name: backend-2
     environment:
       - CONTAINER=backend-2

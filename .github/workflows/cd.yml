@@ -19,5 +19,6 @@ jobs:
           port:  22
           script:  |
             cd ~/projects/loadbalancer
+            export IMAGE_TAG=${{ github.sha }}
             docker compose pull
             docker compose up -d
