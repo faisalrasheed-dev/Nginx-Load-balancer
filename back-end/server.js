@@ -5,7 +5,7 @@ const port = process.env.PORT || 3000;
 const container = process.env.CONTAINER || "Container";
 
 app.get('/', (req, res) => {
-    res.send(`Load Balancer Backend | ${container} | Port ${port}`);
+    res.send(`Load Balancer Backend v2 | ${container} | Port ${port}`);
 });
 
 app.get('/health', (req, res) => {
