@@ -1,8 +1,7 @@
 import express from "express";
-
+import os from "os";
 const app = express();
 const port = process.env.PORT || 3000;
-const container = process.env.CONTAINER || "Container";
 
 app.get("/", (req, res) => {
   res.send(`
@@ -50,7 +49,7 @@ app.get("/", (req, res) => {
       <body>
         <div class="card">
           <h1>Load Balancer</h1>
-          <p><strong>Container:</strong> ${container}</p>
+          <p><strong>Container:</strong> ${os.hostname()}</p>
           <p><strong>Port:</strong> ${port}</p>
         </div>
       </body>
@@ -59,9 +58,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("/health", (req, res) => {
-  res.status(200).json({ status: "ok", container });
+  res.status(200).json({ status: "ok", container:os.hostname() });
 });
 
 app.listen(port, () => {
-  console.log(`${container} started on port ${port}`);
+  console.log(`Started on port ${port}`);
 });

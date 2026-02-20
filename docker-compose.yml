@@ -1,11 +1,8 @@
 services:
-  backend-1:
-    image: faisalrasheedpro/loadbalancer:${IMAGE_TAG}
-    container_name: backend-1
-    environment: 
-      - CONTAINER=backend-1
-    ports:
-      - "3001:3000"
+  backend:
+    image:  faisalrasheedpro/loadbalancer:${IMAGE_TAG}
+    expose:
+      - "3000"
     networks:
       - lb-net
     restart: unless-stopped
@@ -14,22 +11,6 @@ services:
       interval: 10s
       timeout: 3s
       retries: 3
-      start_period: 5s
-  backend-2:
-    image: faisalrasheedpro/loadbalancer:${IMAGE_TAG}
-    container_name: backend-2
-    environment:
-      - CONTAINER=backend-2
-    ports:
-      - "3002:3000"
-    networks:
-      - lb-net
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
-      interval: 10s
-      retries: 3
-      timeout: 3s
       start_period: 5s
 
   nginx-lb:
@@ -38,8 +19,7 @@ services:
     ports:
       - "4000:80"
     depends_on: 
-      - backend-1
-      - backend-2
+      - backend
     networks:
       - lb-net
     restart: unless-stopped
